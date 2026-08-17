@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harsh Meena — Full Stack & AI Developer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-color: #0D0F12;
+      --card-bg: #161A22;
+      --card-hover: #1F2430;
+      --text-main: #F0F4F8;
+      --text-muted: #94A3B8;
+      --accent-gold: #D4AF37;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-color); }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 6%;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(13, 15, 18, 0.85);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--accent-gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--accent-gold); }
+
+    .btn-touch {
+      background: linear-gradient(135deg, var(--accent-gold), #B8860B);
+      color: #0D0F12;
+      padding: 10px 22px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-touch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    }
+
+    /* Mobile Toggle */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 40px;
+      padding: 140px 8% 80px;
+    }
+
+    .hero-text { z-index: 2; }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10B981;
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span { color: var(--accent-gold); }
+
+    .hero-bio {
+      color: var(--text-muted);
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      margin-bottom: 30px;
+      max-width: 580px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .hero-image-box {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .portrait-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      height: 440px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid var(--accent-gold);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2), var(--shadow-lg);
+    }
+
+    .portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.5s ease;
+    }
+
+    .portrait-wrapper:hover .portrait-img {
+      transform: scale(1.04);
+    }
+
+    /* Common Sections */
+    .section {
+      padding: 80px 8%;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .section-subtitle {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 36px;
+    }
+
+    /* Grids */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .info-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 28px;
+      border-radius: 16px;
+    }
+
+    .info-box h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+
+    .edu-item { margin-bottom: 20px; }
+    .edu-title { font-weight: 700; font-size: 1rem; }
+    .edu-meta { font-size: 0.85rem; color: var(--accent-gold); margin-bottom: 4px; }
+    .edu-desc { font-size: 0.88rem; color: var(--text-muted); }
+
+    .exp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .exp-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .exp-role { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; }
+    .exp-company { color: var(--accent-gold); font-weight: 600; font-size: 0.88rem; margin-bottom: 12px; }
+    .exp-card ul { list-style-position: inside; color: var(--text-muted); font-size: 0.88rem; }
+    .exp-card li { margin-bottom: 6px; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 28px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+
+    .project-card h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+    .project-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .tech-tags span { font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); }
+
+    .project-link { text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; }
+
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .achieve-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .achieve-icon { font-size: 1.3rem; color: var(--accent-gold); }
+    .achieve-card h5 { font-size: 0.95rem; font-weight: 700; margin-bottom: 2px; }
+    .achieve-card p { font-size: 0.82rem; color: var(--text-muted); }
+
+    .skills-flex { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag { background: var(--card-bg); border: 1px solid var(--border-color); padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.85rem; }
+
+    footer { background: #080A0C; padding: 50px 8% 30px; border-top: 1px solid var(--border-color); }
+    .footer-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+    .footer-socials a { color: var(--text-muted); font-size: 1.3rem; margin-left: 16px; }
+    .footer-copy { text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 0.82rem; }
+
+    /* --- RESPONSIVE MEDIA QUERIES --- */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 120px;
+        gap: 50px;
+      }
+
+      .hero-bio { margin: 0 auto 24px; }
+      .hero-btns { justify-content: center; }
+
+      .portrait-wrapper {
+        max-width: 280px;
+        height: 360px;
+        margin: 0 auto;
+      }
+
+      .menu-toggle { display: block; }
+
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: rgba(13, 15, 18, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 30px 0;
+        border-bottom: 1px solid var(--border-color);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+      }
+
+      .nav-links a { font-size: 1.1rem; }
+      .nav-btn-hide { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .section { padding: 60px 5%; }
+      .navbar { padding: 14px 5%; }
+      .portrait-wrapper { max-width: 240px; height: 310px; }
+      .hero-btns { flex-direction: column; width: 100%; }
+      .btn-touch, .btn-secondary { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="brand">HARSH<span>.DEV</span></a>
+    
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="nav-links" id="nav-list">
+      <a href="#about" class="nav-item">About</a>
+      <a href="#experience" class="nav-item">Experience</a>
+      <a href="#projects" class="nav-item">Projects</a>
+      <a href="#achievements" class="nav-item">Achievements</a>
+      <a href="#skills" class="nav-item">Skills</a>
+      <a href="mailto:harshmeena110820@gmail.com" class="btn-touch" style="margin-top: 10px;">Get In Touch</a>
+    </div>
+
+    <a href="mailto:harshmeena110820@gmail.com" class="btn-touch nav-btn-hide">Get In Touch</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="about">
+    <div class="hero-text">
+      <div class="badge-status">
+        <span class="status-dot"></span> Open for Full Stack & AI Roles
+      </div>
+      <h1 class="hero-title">Hi, I'm <span>Harsh Meena</span></h1>
+      <p class="hero-bio">
+        Motivated BCA (AI/ML) student aspiring to become a Full Stack Developer. Skilled in frontend & backend development, Python, Java, REST APIs, and securing networks.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-touch">Explore Projects</a>
+        <a href="https://github.com/harsh-coder-9122" target="_blank" class="btn-secondary"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </div>
+
+    <div class="hero-image-box">
+      <div class="portrait-wrapper">
+        <img src="./harsh.png" alt="Harsh Meena" class="portrait-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- About & Education Section -->
+  <section class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Background</p>
+      <h2 class="section-title">Education & Summary</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="info-box">
+        <h3><i class="fas fa-user-graduate" style="color: var(--accent-gold);"></i> Education</h3>
+        
+        <div class="edu-item">
+          <div class="edu-title">Bachelor of Computer Applications (AI/ML)</div>
+          <div class="edu-meta">JB Knowledge Park, Faridabad | 2025 – Present</div>
+          <div class="edu-desc">Specializing in Artificial Intelligence, Machine Learning, Data Structures, and Software Development.</div>
+        </div>
+        
+        <div class="edu-item" style="margin-top: 20px;">
+          <div class="edu-title">12th Grade (Physics, Chemistry, Math)</div>
+          <div class="edu-meta">Panchsheel Public School, New Delhi | 2024 – 2025</div>
+          <div class="edu-desc">Completed Senior Secondary Education with core Focus on Science & Mathematics.</div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h3><i class="fas fa-bullseye" style="color: var(--accent-gold);"></i> Overview</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">
+          I am a developer with hands-on experience building web applications, integrating AI APIs, and designing network infrastructure. My focus lies at the intersection of full-stack development and artificial intelligence.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="section" id="experience">
+    <div class="section-header">
+      <p class="section-subtitle">Career</p>
+      <h2 class="section-title">Practical Experience</h2>
+    </div>
+
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-role">Cyber Smart AI Prime Intern</div>
+        <div class="exp-company">NIIT Foundation | Jun 2026 – Aug 2026</div>
+        <ul>
+          <li>Completed 4-week Cyber Suraksha Plus Internship focusing on network security.</li>
+          <li>Configured WAN, Wi-Fi security (WPA2/AES), MAC filtering, and router management using Cisco Packet Tracer.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-role">Campus Ambassador (Cohort 1)</div>
+        <div class="exp-company">DevAngers | Aug 2026 – Present</div>
+        <ul>
+          <li>Represented DevAngers developer community across campus initiatives.</li>
+          <li>Promoted technology learning opportunities and developer engagement events.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="section" id="projects">
+    <div class="section-header">
+      <p class="section-subtitle">Work</p>
+      <h2 class="section-title">Featured Projects</h2>
+    </div>
+
+    <div class="project-grid">
+      <div class="project-card">
+        <div>
+          <h4>Kavach AI</h4>
+          <p>Regional phishing & fraud defense system built with Google Gemini API. Performs multilingual threat detection on SMS, WhatsApp, and audio transcripts.</p>
+          <div class="tech-tags"><span>Python</span><span>Gemini API</span><span>NLP</span></div>
+        </div>
+        <a href="https://github.com/harsh-coder-9122" target="_blank" class="project-link">View Code <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <h4>Samvedna AI</h4>
+          <p>AI-driven mental health support platform. Analyzes user input to detect depression indicators and automates alert notifications using REST APIs.</p>
+          <div class="tech-tags"><span>Python</span><span>Google AI Studio</span><span>REST APIs</span></div>
+        </div>
+        <a href="https://github.com/harsh-coder-9122" target="_blank" class="project-link">View Code <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <h4>Organization Network Security</h4>
+          <p>Configured enterprise network topology in Cisco Packet Tracer incorporating WPA2-Personal/AES encryption, MAC filtering, and secure WAN routing.</p>
+          <div class="tech-tags"><span>Cisco Packet Tracer</span><span>WAN</span><span>Security</span></div>
+        </div>
+        <a href="https://github.com/harsh-coder-9122" target="_blank" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <h4>Netflix Clone</h4>
+          <p>Responsive frontend replica of Netflix streaming interface featuring modern CSS layouts and cross-device scaling.</p>
+          <div class="tech-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        </div>
+        <a href="https://github.com/harsh-coder-9122" target="_blank" class="project-link">View Code <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section class="section" id="achievements">
+    <div class="section-header">
+      <p class="section-subtitle">Recognition</p>
+      <h2 class="section-title">Achievements</h2>
+    </div>
+
+    <div class="achieve-grid">
+      <div class="achieve-card">
+        <div class="achieve-icon"><i class="fas fa-trophy"></i></div>
+        <div>
+          <h5>NEXUS AI Quiz Ignite 2026</h5>
+          <p>Secured <strong>Rank 39th</strong> out of 20,000+ registered participants on Unstop.</p>
+        </div>
+      </div>
+
+      <div class="achieve-card">
+        <div class="achieve-icon"><i class="fas fa-medal"></i></div>
+        <div>
+          <h5>AI Agents Quiz Challenge 2026</h5>
+          <p>Ranked <strong>1st Place</strong> out of 228 competitors with a perfect 15/15 score.</p>
+        </div>
+      </div>
+
+      <div class="achieve-card">
+        <div class="achieve-icon"><i class="fas fa-shield-alt"></i></div>
+        <div>
+          <h5>Operation Cipher 2026 Hackathon</h5>
+          <p>Qualified through multiple rounds to reach the <strong>Final Round</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section" id="skills">
+    <div class="section-header">
+      <p class="section-subtitle">Capabilities</p>
+      <h2 class="section-title">Technical Skills</h2>
+    </div>
+
+    <div class="skills-flex">
+      <div class="skill-tag">Python</div>
+      <div class="skill-tag">Java</div>
+      <div class="skill-tag">JavaScript</div>
+      <div class="skill-tag">C Language</div>
+      <div class="skill-tag">HTML / CSS</div>
+      <div class="skill-tag">SQL / MySQL</div>
+      <div class="skill-tag">REST APIs</div>
+      <div class="skill-tag">Google AI Studio</div>
+      <div class="skill-tag">Cisco Packet Tracer</div>
+      <div class="skill-tag">Git / GitHub</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-flex">
+      <div>
+        <h3 style="font-family: 'Space Grotesk'; font-size: 1.6rem;">Harsh Meena</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Full Stack Developer & AI Enthusiast</p>
+      </div>
+      <div class="footer-socials">
+        <a href="https://github.com/harsh-coder-9122" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/harsh-meena-545239415" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:harshmeena110820@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      © 2026 Harsh Meena. Built for <strong>harshcoder.xyz</strong>.
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    menuToggle.addEventListener('click', () => {
+      navList.classList.toggle('active');
+    });
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navList.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
